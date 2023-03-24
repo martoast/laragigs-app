@@ -10,19 +10,13 @@
                 <p class="card-text">{{listing.description}}</p>
             </div>
         </div>
-
         </div>
-
        </div>
     </div>
 </template>
 
 <script setup>
 
-
 const listings = await $fetch("/listings")
-
-console.log(listings)
-
 
 </script>
