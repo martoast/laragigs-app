@@ -9,7 +9,7 @@
                     </svg>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><a class="dropdown-item" :href="'/user/' + user.uuid">Profile</a></li>
+                    <li><a class="dropdown-item" :href="'/users/' + user.uuid">Profile</a></li>
                     <li>
                         <button class="dropdown-item" type="button" @click="$logout">
                             Logout
