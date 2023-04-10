@@ -1,6 +1,6 @@
 <template>
   <div class="container register-container">
-    <div class="row justify-content-center align-items-center" style="height: calc(100vh - 66px);">
+    <div class="row justify-content-center align-items-center" style="height: calc(100vh - 100px);">
       <div class="col-md-6">
         <div class="card">
           <div class="card-body">
@@ -8,18 +8,40 @@
             <form @submit.prevent="onSubmit">
               <div class="form-group mb-4">
                 <label for="title" class="form-label">Title</label>
-                <input v-model="data.form.title" type="text" class="form-control" id="title" placeholder="Enter the listing title">
+                <input v-model="data.form.title" type="text" :class="{ 'is-invalid': hasError('title') }" class="form-control" id="title" placeholder="Enter the listing title">
+                <div v-if="data.errors?.title" class="invalid-feedback px-1">
+                  <template v-for="error in data.errors.title" :key="error">
+                    <li v-html="error"></li>
+                  </template>
+                </div>
               </div>
               <div class="form-group mb-4">
                 <label for="description" class="form-label">Description</label>
-                <textarea v-model="data.form.description" class="form-control" id="description" placeholder="Enter the listing description"></textarea>
+                <textarea v-model="data.form.description" :class="{ 'is-invalid': hasError('description') }" class="form-control" id="description" placeholder="Enter the listing description"></textarea>
+                <div v-if="data.errors?.description" class="invalid-feedback px-1">
+                  <template v-for="error in data.errors.description" :key="error">
+                    <li v-html="error"></li>
+                  </template>
+                </div>
               </div>
               <div class="form-group mb-4">
                 <label for="salary" class="form-label">Salary</label>
-                <input v-model="data.form.salary" type="text" class="form-control" id="salary" placeholder="Enter the listing salary">
+                <input v-model="data.form.salary" type="text" :class="{ 'is-invalid': hasError('salary') }" class="form-control" id="salary" placeholder="Enter the listing salary">
+                <div v-if="data.errors?.salary" class="invalid-feedback px-1">
+                  <template v-for="error in data.errors.salary" :key="error">
+                    <li v-html="error"></li>
+                  </template>
+                </div>
               </div>
               <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary" :disabled="data.loading">Submit</button>
+                <button type="submit" class="btn btn-primary" :disabled="data.loading">
+                  <span v-if="!data.loading">Submit</span>
+                  <span v-else>
+                    <div class="spinner-border spinner-border-sm" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </span>
+                </button>
               </div>
             </form>
           </div>
@@ -49,7 +71,6 @@ const onSubmit = async () => {
             method: 'post',
             body: data.form
         })
-        console.log(response)
         await navigateTo('/listings/' + response.listing.id)
         // Handle success
     } catch (error) {
@@ -97,5 +118,22 @@ const onSubmit = async () => {
   }
   .register-container a {
     color: #333;
+  }
+  .spinner-border {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: text-bottom;
+    border: .25em solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    -webkit-animation: spinner-border .75s linear infinite;
+    animation: spinner-border .75s linear infinite;
+  }
+
+  @keyframes spinner-border {
+    to {
+      transform: rotate(360deg);
+    }
   }
 </style>
