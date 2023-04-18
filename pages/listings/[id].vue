@@ -16,9 +16,9 @@
                     <img :src="listing.image" class="card-img-top" alt="listing image" v-if="listing.image" style="height: 10%;">
                     <div class="card-body">
                         <h5 class="card-title">{{listing.title}}</h5>
-                        <span v-for="tag in listing.tags" :key="tag" class="badge text-bg-dark px-3 m-3">{{tag}}</span>
+                        <span v-for="tag in listing.tags" :key="tag" class="badge text-white px-3 m-2" style="background-color:#f8b500">{{tag}}</span>
                         <p class="card-text">{{listing.description}}</p>
-                        <p class="mb-4">Salary: {{listing.salary}}</p>
+                        <p class="mb-4" style="font-weight: bold;">Salary: {{listing.salary}}</p>
                         <p class="mb-0">Contact email: {{listing.email}}</p>
                         <div class="d-flex justify-content-between align-items-center mt-4">
                             <div></div>
@@ -37,10 +37,7 @@
 
 const route = useRoute();
 
-
 const listing = await $fetch("/listings/" + route.params.id)
-
-console.log(listing)
 
 </script>
 
@@ -61,5 +58,9 @@ border: none;
 a {
   text-decoration: none;
   color: inherit;
+}
+.card-img-top, .card-img-bottom {
+    width: auto;
+    max-height: 195px;
 }
 </style>
