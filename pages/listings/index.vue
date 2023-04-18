@@ -11,10 +11,9 @@
             <a :href="'/listings/' + listing.id" class="card-link">
                 <div class="card h-100 border-0">
                     <img :src="listing.image" class="card-img-top" alt="listing image" v-if="listing.image">
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <a :href="'/listings/' + listing.id" style="text-decoration: none; color: black;"><h5 class="card-title">{{listing.title}}</h5></a>
-                        <p class="card-text">{{listing.description}}</p>
-                        <p class="mb-4">Salary: {{listing.salary}}</p>
+                        <span v-for="tag in listing.tags" :key="tag" class="badge text-white px-3 m-2" style="background-color:#f8b500">{{tag}}</span>
                     </div>
                 </div>
             </a>

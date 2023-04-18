@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-5">
+    <div class="container my-5">
         <div class="pb-4">
             <a href="/listings">
             <button class="btn btn-primary">
@@ -16,6 +16,7 @@
                     <img :src="listing.image" class="card-img-top" alt="listing image" v-if="listing.image" style="height: 10%;">
                     <div class="card-body">
                         <h5 class="card-title">{{listing.title}}</h5>
+                        <span v-for="tag in listing.tags" :key="tag" class="badge text-bg-dark px-3 m-3">{{tag}}</span>
                         <p class="card-text">{{listing.description}}</p>
                         <p class="mb-4">Salary: {{listing.salary}}</p>
                         <p class="mb-0">Contact email: {{listing.email}}</p>

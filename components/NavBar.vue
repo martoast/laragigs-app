@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#">Laragigs</a>
+        <a class="navbar-brand" href="/listings">Laragigs</a>
         <button class="navbar-toggler" type="button"  data-bs-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

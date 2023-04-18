@@ -20,6 +20,20 @@
                 </div>
               </div>
               <div class="form-group mb-4">
+                <label for="tags" class="form-label">Tags</label>
+                <div class="mb-3">
+                  <span v-for="tag in data.form.tags" :key="tag" class="badge text-white px-3 mx-2" style="background-color:#f8b500">{{tag}}</span>
+                </div>
+                <select v-model="data.form.tags" multiple class="form-select form-control form-select-lg mb-3" :class="{ 'is-invalid': hasError('tags') }" id="tags" aria-label=".form-select-lg example">
+                  <option v-for="tag in tag_options" :key="tag" :value="tag">{{tag}}</option>
+                </select>                
+                <div v-if="data.errors?.tags" class="invalid-feedback px-1">
+                  <template v-for="error in data.errors.tags" :key="error">
+                    <li v-html="error"></li>
+                  </template>
+                </div>
+              </div>
+              <div class="form-group mb-4">
                 <label for="salary" class="form-label">Salary</label>
                 <input v-model="data.form.salary" type="text" :class="{ 'is-invalid': hasError('salary') }" class="form-control" id="salary" placeholder="Enter the listing salary">
                 <div v-if="data.errors?.salary" class="invalid-feedback px-1">
@@ -83,11 +97,51 @@ const data = reactive({
     form: {
         title: null,
         description: null,
+        tags: [],
         salary: null,
         email: null,
         image: null
     }
 });
+
+const tag_options = [
+  "Frontend",
+  "Backend",
+  "API",
+  "AWS",
+  "JavaScript",
+  "Node.js",
+  "React",
+  "Vue.js",
+  "Angular",
+  "Express",
+  "MongoDB",
+  "SQL",
+  "Python",
+  "Java",
+  "Ruby",
+  "PHP",
+  "DevOps",
+  "CI/CD",
+  "Testing",
+  "Agile",
+  "Scrum",
+  "Git",
+  "Docker",
+  "Kubernetes",
+  "Microservices",
+  "Serverless",
+  "Cloud",
+  "Mobile",
+  "UI/UX",
+  "Security",
+  "Blockchain",
+  "Machine Learning",
+  "Artificial Intelligence",
+  "Data Science",
+  "Big Data",
+  "IoT"
+];
 
 let previewUrl = ref(null);
 
