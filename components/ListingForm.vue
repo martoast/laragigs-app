@@ -155,12 +155,32 @@ const onFileChange = (e) => {
   }
 }
 
+const setupFormData = () => {
+  const formData = new FormData();
+    for (const [key, value] of Object.entries(data.form)) {
+      if (key === 'tags' && Array.isArray(value)) {
+        for (const tag of value) {
+          formData.append('tags[]', tag);
+        }
+      } else if (key === 'tags' && typeof value === 'string') {
+        const tagsArray = value.split(',');
+        for (const tag of tagsArray) {
+          formData.append('tags[]', tag.trim());
+        }
+      } else {
+        formData.append(key, value);
+      }
+    }
+  return formData
+}
+
 const onSubmit = async () => {
     data.loading = true
+    let formData = setupFormData()
     try {
         let response = await $fetch('/listings', {
             method: 'post',
-            body: data.form
+            body: formData,
         })
         await navigateTo('/listings/' + response.listing.id)
         // Handle success
